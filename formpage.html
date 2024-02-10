@@ -548,21 +548,34 @@
         });
 
         $("form").submit(function(e) {
-            e.preventDefault(); 
+            e.preventDefault(); // Prevent the form from submitting normally
 
-            console.log("Form submitted"); 
+            console.log("Form submitted");
 
-            // Show alert
-            alert("The form is submitted.");
+            // Perform any necessary form data validation here
 
-            // Redirect to index.html after 3 seconds
-            setTimeout(function() {
-                window.location.href = "index.html";
-            }, 3000);
+            // Submit the form data asynchronously
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    // Display alert message
+                    alert("The form is submitted.");
+                    // Redirect to index.html after 3 seconds
+                    setTimeout(function() {
+                        window.location.href = "index.html";
+                    }, 3000);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('An error occurred while submitting the form. Please try again later.');
+                }
+            });
         });
 
         function validateStep1() {
-            return true;
+            return true; // Add your validation logic for step 1 here
         }
     });
 </script>
