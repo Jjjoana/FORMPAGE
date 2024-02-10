@@ -528,58 +528,40 @@
 
 
 <script>
-    $(document).ready(function() {
-        var currentStep = 1;
+  $(document).ready(function() {
+      var currentStep = 1;
 
-        $(".next-step").click(function() {
-            if (currentStep === 1 && !validateStep1()) {
-                return;
-            }
+      $(".next-step").click(function() {
+          if (currentStep === 1 && !validateStep1()) {
+              return;
+          }
 
-            $("#step" + currentStep).hide();
-            currentStep++;
-            $("#step" + currentStep).show();
-        });
+          $("#step" + currentStep).hide();
+          currentStep++;
+          $("#step" + currentStep).show();
+      });
 
-        $(".prev-step").click(function() {
-            $("#step" + currentStep).hide();
-            currentStep--;
-            $("#step" + currentStep).show();
-        });
+      $(".prev-step").click(function() {
+          $("#step" + currentStep).hide();
+          currentStep--;
+          $("#step" + currentStep).show();
+      });
 
-        $("form").submit(function(e) {
-            e.preventDefault(); // Prevent the form from submitting normally
+      $("form").submit(function(e) {
+          // If the form is submitted traditionally, it will redirect to the specified URL
+          // If you want to add an alert before redirecting, you can do it here
+          alert("The form is submitted.");
+          
+          setTimeout(function() {
+              window.location.href = "index.html";
+            }, 3000);
+      });
 
-            console.log("Form submitted");
-
-            // Perform any necessary form data validation here
-
-            // Submit the form data asynchronously
-            $.ajax({
-                url: $(this).attr('action'),
-                type: $(this).attr('method'),
-                data: $(this).serialize(),
-                success: function(response) {
-                    // Display alert message
-                    alert("The form is submitted.");
-                    // Redirect to index.html after 3 seconds
-                    setTimeout(function() {
-                        window.location.href = "index.html";
-                    }, 3000);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                    alert('An error occurred while submitting the form. Please try again later.');
-                }
-            });
-        });
-
-        function validateStep1() {
-            return true; // Add your validation logic for step 1 here
-        }
-    });
+      function validateStep1() {
+          return true; // Add your validation logic for step 1 here
+      }
+  });
 </script>
-
 
 </body>
 </html>
