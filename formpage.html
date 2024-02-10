@@ -528,51 +528,43 @@
 
 
 <script>
-  $(document).ready(function() {
-      var currentStep = 1;
+    $(document).ready(function() {
+        var currentStep = 1;
 
-      $(".next-step").click(function() {
-         
-          if (currentStep === 1 && !validateStep1()) {
-              return;
-          }
+        $(".next-step").click(function() {
+            if (currentStep === 1 && !validateStep1()) {
+                return;
+            }
 
-          $("#step" + currentStep).hide();
-          currentStep++;
-          $("#step" + currentStep).show();
+            $("#step" + currentStep).hide();
+            currentStep++;
+            $("#step" + currentStep).show();
+        });
 
-          
-         
-      });
+        $(".prev-step").click(function() {
+            $("#step" + currentStep).hide();
+            currentStep--;
+            $("#step" + currentStep).show();
+        });
 
-      $(".prev-step").click(function() {
-          $("#step" + currentStep).hide();
-          currentStep--;
-          $("#step" + currentStep).show();
-      });
+        $("form").submit(function(e) {
+            e.preventDefault(); 
 
-      $("form").submit(function(e) {
-          e.preventDefault(); 
+            console.log("Form submitted"); 
 
-          console.log("Form submitted"); 
+            // Show alert
+            alert("The form is submitted.");
 
-          
-          this.submit();
+            // Redirect to index.html after 3 seconds
+            setTimeout(function() {
+                window.location.href = "index.html";
+            }, 3000);
+        });
 
-         
-          alert("The form is submitted.");
-
-          
-          setTimeout(function() {
-              window.location.href="index.html" onclick="window.open('index.html', '_self');";
-          }, 3000);
-      });
-
-      function validateStep1() {
-         
-          return true;
-      }
-  });
+        function validateStep1() {
+            return true;
+        }
+    });
 </script>
 
 
